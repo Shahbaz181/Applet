@@ -276,8 +276,73 @@ public class MouseKeyApplet extends Applet implements MouseListener, MouseMotion
 }
 
 To Run the Applet
-
 1. Save the file as `MouseKeyApplet.java`.
 2. Compile: `javac MouseKeyApplet.java`
 3. Run using an applet viewer:appletviewer MouseKeyApplet.java
 
+
+
+
+
+chatgpt ka applet wala 
+
+import java.applet.Applet;
+import java.awt.*;
+import java.awt.event.*;
+
+/* <applet code="MouseKeyApplet" width=400 height=300></applet> */
+
+public class MouseKeyApplet extends Applet implements MouseListener, MouseMotionListener, KeyListener {
+    String message = "";
+    int mouseX, mouseY;
+
+    public void init() {
+        setBackground(Color.LIGHT_GRAY);
+
+        addMouseListener(this);
+        addMouseMotionListener(this);
+        addKeyListener(this);
+
+        setFocusable(true); // Required for key events
+        requestFocus();     // Request focus so key events are detected
+    }
+
+    public void paint(Graphics g) {
+        g.drawString(message, mouseX, mouseY);
+    }
+
+    // Helper method to update message and coordinates
+    private void updateMessage(String msg, MouseEvent e) {
+        message = msg;
+        mouseX = e.getX();
+        mouseY = e.getY();
+        repaint();
+    }
+
+    // MouseListener methods
+    public void mouseClicked(MouseEvent e) { updateMessage("Mouse Clicked", e); }
+    public void mousePressed(MouseEvent e) { updateMessage("Mouse Pressed", e); }
+    public void mouseReleased(MouseEvent e) { updateMessage("Mouse Released", e); }
+    public void mouseEntered(MouseEvent e) { updateMessage("Mouse Entered", e); }
+    public void mouseExited(MouseEvent e)  { updateMessage("Mouse Exited", e); }
+
+    // MouseMotionListener methods
+    public void mouseDragged(MouseEvent e) { updateMessage("Mouse Dragged", e); }
+    public void mouseMoved(MouseEvent e)   { updateMessage("Mouse Moved", e); }
+
+    // KeyListener methods
+    public void keyPressed(KeyEvent e) {
+        message = "Key Pressed: " + e.getKeyChar();
+        repaint();
+    }
+
+    public void keyReleased(KeyEvent e) {
+        message = "Key Released: " + e.getKeyChar();
+        repaint();
+    }
+
+    public void keyTyped(KeyEvent e) {
+        message = "Key Typed: " + e.getKeyChar();
+        repaint();
+    }
+}
