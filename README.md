@@ -275,3 +275,9 @@ public class MouseKeyApplet extends Applet implements MouseListener, MouseMotion
     }
 }
 
+To Run the Applet
+
+1. Save the file as `MouseKeyApplet.java`.
+2. Compile: `javac MouseKeyApplet.java`
+3. Run using an applet viewer:appletviewer MouseKeyApplet.java
+
