@@ -287,62 +287,82 @@ To Run the Applet
 chatgpt ka applet wala 
 
 import java.applet.Applet;
+
 import java.awt.*;
+
 import java.awt.event.*;
 
 /* <applet code="MouseKeyApplet" width=400 height=300></applet> */
 
-public class MouseKeyApplet extends Applet implements MouseListener, MouseMotionListener, KeyListener {
-    String message = "";
-    int mouseX, mouseY;
+public class MouseKeyApplet extends Applet implements MouseListener, MouseMotionListener,
 
-    public void init() {
-        setBackground(Color.LIGHT_GRAY);
+KeyListener {
 
-        addMouseListener(this);
-        addMouseMotionListener(this);
-        addKeyListener(this);
+String message = "";
 
-        setFocusable(true); // Required for key events
-        requestFocus();     // Request focus so key events are detected
-    }
+int mouseX, mouseY;
 
-    public void paint(Graphics g) {
-        g.drawString(message, mouseX, mouseY);
-    }
+public void init() {
 
-    // Helper method to update message and coordinates
-    private void updateMessage(String msg, MouseEvent e) {
-        message = msg;
-        mouseX = e.getX();
-        mouseY = e.getY();
-        repaint();
-    }
+addMouseListener(this);
 
-    // MouseListener methods
-    public void mouseClicked(MouseEvent e) { updateMessage("Mouse Clicked", e); }
-    public void mousePressed(MouseEvent e) { updateMessage("Mouse Pressed", e); }
-    public void mouseReleased(MouseEvent e) { updateMessage("Mouse Released", e); }
-    public void mouseEntered(MouseEvent e) { updateMessage("Mouse Entered", e); }
-    public void mouseExited(MouseEvent e)  { updateMessage("Mouse Exited", e); }
+addMouseMotionListener(this);
 
-    // MouseMotionListener methods
-    public void mouseDragged(MouseEvent e) { updateMessage("Mouse Dragged", e); }
-    public void mouseMoved(MouseEvent e)   { updateMessage("Mouse Moved", e); }
+addKeyListener(this);
 
-    // KeyListener methods
-    public void keyPressed(KeyEvent e) {
-        message = "Key Pressed: " + e.getKeyChar();
-        repaint();
-    }
+setBackground(Color.LIGHT_GRAY); //←– color corrected ☑️
 
-    public void keyReleased(KeyEvent e) {
-        message = "Key Released: " + e.getKeyChar();
-        repaint();
-    }
+setFocusable(true);
 
-    public void keyTyped(KeyEvent e) {
-        message = "Key Typed: " + e.getKeyChar();
-        repaint();
-    }
+}
+
+public void paint(Graphics g) {
+
+g.drawString(message, mouseX, mouseY);
+
+}
+
+// Common update method
+
+private void updateMessage(String msg, MouseEvent e) {
+
+message = msg;
+
+mouseX = e.getX();
+
+mouseY = e.getY();
+
+repaint();
+
+}
+
+// MouseListener methods
+
+public void mouseClicked(MouseEvent e) { updateMessage("Mouse Clicked", e); }
+
+public void mousePressed(MouseEvent e) { updateMessage("Mouse Pressed", e); }
+
+public void mouseReleased(MouseEvent e) { updateMessage("Mouse Released", e); }
+
+public void mouseEntered(MouseEvent e) { updateMessage("Mouse Entered", e); }
+
+public void mouseExited(MouseEvent e) { updateMessage("Mouse Exited", e); }
+
+// MouseMotionListener methods
+
+public void mouseDragged(MouseEvent e) { updateMessage("Mouse Dragged", e); }
+
+public void mouseMoved(MouseEvent e) { updateMessage("Mouse Moved", e); }
+
+// KeyListener methods
+public void keyPressed(KeyEvent e) { message = "Key Pressed: " + e.getKeyChar();
+
+repaint(); }
+
+public void keyReleased(KeyEvent e) { message = "Key Released: " + e.getKeyChar();
+
+repaint(); }
+
+public void keyTyped(KeyEvent e) { message = "Key Typed: " + e.getKeyChar(); repaint(); }
+
 }
